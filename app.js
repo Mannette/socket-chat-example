@@ -10,6 +10,15 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+io.on('connection', function(socket) {
+  console.log('someone entered the chat room!');
+
+  socket.on('chat message', function(message) {
+    io.emit('chat message', message);
+  });
+
+});
+
 server.listen(3000, function() {
   console.log('listening on localhost:3000');
 });
